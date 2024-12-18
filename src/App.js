@@ -4,8 +4,12 @@
 import Navbar from "./Components/Navbar";
 import Card from './Components/Card'
 import Modal from "./Components/Modal";
+import { useState } from "react";
 
 function App() {
+  const [data, setData] = useState([]);
+  console.log(data);
+
   return (
     <>
       <Navbar />
@@ -16,11 +20,15 @@ function App() {
         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
           Write
         </button>
-        <Modal/>
+        <Modal data={data} setData={setData} />
       </div>
-      <div className="container">
-        <Card />
-      </div>
+      {
+        data.map((element, index) => {
+          return (<div className="container" key={element.time}>
+            <Card time={element.time} text={element.text} />
+          </div>)
+        })
+      }
     </>
   );
 }

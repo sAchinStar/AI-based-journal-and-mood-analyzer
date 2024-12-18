@@ -1,4 +1,24 @@
-function Modal() {
+function Modal({ data, setData }) {
+    let text;
+    const handleText = (e) => {
+        text = e.target.value
+    }
+    const handleSave = (e) => {
+        
+        //Modal Save button validation
+        if (text!='' & text!=undefined){
+            setData([...data, {time:new Date().toString(),text : text}])
+            document.querySelector(".fade").setAttribute("aria-hidden",true)
+        }
+        else{
+            alert("Enter Something !!")
+        }
+
+    }
+    const handleClose= ()=>{
+        document.getElementById("text").value='';
+
+    }
     return (
         <div className="container text-center bg-info-subtle">
             {/* <!-- Modal --> */}
@@ -7,15 +27,15 @@ function Modal() {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-5" id="staticBackdropLabel">Write about your day/thoughts/feelings</h1>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button onClick={handleClose} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <textarea className="form control" cols={101} rows={20} placeholder="Write here...">
+                            <textarea onChange={handleText} id="text" className="form control" cols={101} rows={20} placeholder="Write here...">
                             </textarea>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Save</button>
+                            <button onClick={handleClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button onClick={handleSave} type="button" className="btn btn-primary">Save</button>
                         </div>
                     </div>
                 </div>
