@@ -4,19 +4,21 @@ function Modal({ data, setData }) {
         text = e.target.value
     }
     const handleSave = (e) => {
-        
+
         //Modal Save button validation
-        if (text!='' & text!=undefined){
-            setData([...data, {time:new Date().toString(),text : text}])
-            document.querySelector(".fade").setAttribute("aria-hidden",true)
+        if (text !== '' & text !== undefined) {
+            setData([...data, { time: new Date().toString(), text: text }]);
+            document.getElementById("text").value = '';
+
+
         }
-        else{
+        else {
             alert("Enter Something !!")
         }
 
     }
-    const handleClose= ()=>{
-        document.getElementById("text").value='';
+    const handleClose = () => {
+        document.getElementById("text").value = '';
 
     }
     return (
@@ -35,7 +37,7 @@ function Modal({ data, setData }) {
                         </div>
                         <div className="modal-footer">
                             <button onClick={handleClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button onClick={handleSave} type="button" className="btn btn-primary">Save</button>
+                            <button onClick={handleSave} type="button" className="btn btn-primary" data-bs-dismiss="modal">Save</button>
                         </div>
                     </div>
                 </div>
